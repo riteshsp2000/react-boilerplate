@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 // Libraries
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
@@ -16,13 +16,26 @@ const AsyncHome = Loadable({
   loading: ActivityIndicator,
 });
 
+// Function to check the Authenticated status.
+const isAuthenticated = () => {
+  // Check the authentication state as per your way of authentication i.e. jwt, sessions, etc
+};
+
+// Use this Route component for authenticated Routes.
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      isAuthenticated() ? <Component {...props} /> : <Redirect to='/login' />
+    }
+  />
+);
+
 function App() {
   return (
     <Router history={createBrowserHistory}>
       <Switch>
-        <Route path='/' exact>
-          <AsyncHome />
-        </Route>
+        <Route path='/' exact component={AsyncHome} />
         <Redirect to='/' />
       </Switch>
     </Router>
