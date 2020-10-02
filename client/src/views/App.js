@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // Libraries
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
@@ -25,9 +25,7 @@ const isAuthenticated = () => {
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) =>
-      isAuthenticated() ? <Component {...props} /> : <Redirect to='/login' />
-    }
+    render={(props) => (isAuthenticated() ? <Component {...props} /> : <Redirect to='/login' />)}
   />
 );
 
