@@ -17,6 +17,7 @@
 1. React-Redux Setup
 2. Custom Webpack Setup
 3. Support for Code Splitting
+4. Docker support
 
 ## Guidelines
 1. The project is configures using yarn so use yarn and not npm
