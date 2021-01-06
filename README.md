@@ -11,3 +11,12 @@
     <img src="https://img.shields.io/badge/hmr-Hot--Module--Reload--Loadable-red" alt="HMR" />
     <img src="https://img.shields.io/badge/virtualization-Docker-blue" alt="Docker" />
   </p>
+
+
+## Following features are included in this template
+1. React-Redux Setup
+2. Custom Webpack Setup
+3. Support for Code Splitting
+
+## Guidelines
+1. The project is configures using yarn so use yarn and not npm
