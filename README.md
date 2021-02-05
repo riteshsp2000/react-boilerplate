@@ -20,4 +20,4 @@
 4. Docker support
 
 ## Guidelines
-1. The project is configures using yarn so use yarn and not npm
+1. The project is configured using yarn so use yarn and not npm
