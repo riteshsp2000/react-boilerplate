@@ -12,10 +12,10 @@ import ActivityIndicator from '../components/shared/ActivityIndicator';
 import createBrowserHistory from '../utils/history';
 
 // Asynchronous Loading of Pages in different chunks
-const AsyncHome = Loadable({
-  loader: () => import('./Home'),
-  loading: ActivityIndicator,
-});
+// const AsyncHome = Loadable({
+//   loader: () => import('./Home'),
+//   loading: ActivityIndicator,
+// });
 
 // Function to check the Authenticated status.
 const isAuthenticated = () => {
@@ -35,7 +35,7 @@ function App() {
   return (
     <Router history={createBrowserHistory}>
       <Switch>
-        <Route path='/' exact component={AsyncHome} />
+        {/* <Route path='/' exact component={AsyncHome} /> */}
         <Redirect to='/' />
       </Switch>
     </Router>
