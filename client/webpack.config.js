@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
 
 // Plugins
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -8,7 +9,6 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
-const dotenv = require('dotenv');
 
 module.exports = (env) => {
   // eslint-disable-next-line
