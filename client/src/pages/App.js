@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 // Libraries
@@ -22,6 +23,7 @@ const isAuthenticated = () => {
 };
 
 // Use this Route component for authenticated Routes.
+// eslint-disable-next-line no-unused-vars
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
