@@ -5,6 +5,7 @@ function Home() {
   return (
     <div>
       <ReactLogo />
+      {process.env.trial}
     </div>
   );
 }
