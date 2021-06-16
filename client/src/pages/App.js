@@ -8,7 +8,7 @@ import Loadable from 'react-loadable';
 import ActivityIndicator from '../components/shared/ActivityIndicator';
 
 // Helpers
-import createBrowserHistory from '../helpers/history';
+import createBrowserHistory from '../utils/history';
 
 // Asynchronous Loading of Pages in different chunks
 const AsyncHome = Loadable({
