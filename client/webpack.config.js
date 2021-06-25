@@ -132,7 +132,7 @@ module.exports = (env) => {
   };
 
   config.resolve = {
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx'],
   };
 
   if (isProduction) {
