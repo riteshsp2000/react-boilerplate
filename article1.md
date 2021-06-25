@@ -127,7 +127,13 @@ module.exports = (env) => {
 }
 ```
 
-The next few steps are configuring the plugins and setting up other things that we'll be using.
+The next few steps are configuring the plugins and setting up other things that we'll be using. Our setup will be divided into 3 major parts:
+
+1. Plugins Setup: Webpack supports a plethora of different plugins which we can use to configure a certain task.
+2. General config: Configuration that is common to all the environments.
+3. Env specific config: Configuration particular to one environment - in our case it is development and production.
+
+## Plugin Setup
 
 1. Setup support for environment variables.
 
@@ -156,7 +162,7 @@ const envKeys = Object.keys(envVars).reduce((prev, next) => {
 }, {});
 ```
 
-- Once we have our final object up and ready, we configure it webpack.
+- Once we have our final object up and ready, we configure it with webpack.
 
 ```js
 // Maps environment variables from .env file to the project
@@ -170,8 +176,6 @@ const DefinePlugin = new webpack.DefinePlugin(envKeys);
 ```shell
 yarn add -D clean-webpack-plugin
 ```
-
-- Configuration
 
 ```js
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -205,7 +209,7 @@ const AnalyzerPlugin = new BundleAnalyzerPlugin({
 
 4. HTML Plugin
 
-- If you dont have this, none of this will work. So we have a template html file which is used by webpack. Since we have code splitting in our project, it'll dynamically import the script tags accordingly.
+- If you don't have this, none of this will work. So we have a template html file which is used by webpack. Since we have code splitting in our project, it'll dynamically import the script tags accordingly.
 
 ```shell
 yarn add -D html-webpack-plugin
@@ -238,7 +242,7 @@ const CopyPlugin = new CopyWebpackPlugin({
 });
 ```
 
-## Lets build webpack!
+## General Config: Lets build webpack!
 
 Alright! We have all our plugins configured! Its now time to build our webpack configuration!
 In this part we'll be creating a config object that is returned by out configuration function which configures webpack. Lets start with creating an empty object which we'll keep on populating.
@@ -309,7 +313,12 @@ config.plugins = [
 ];
 ```
 
-5. Module:
+5. Loaders:
+   Loaders are transformations that are applied to the source code of a module. They allow you to pre-process files as you import or “load” them. Thus, loaders are kind of like “tasks” in other build tools and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript or load inline images as data URLs. Loaders even allow you to do things like import CSS files directly from your JavaScript modules!
+
+```shell
+yarn add -D babel-loader file-loader html-loader style-loader css-loader
+```
 
 ```js
 config.module = {
@@ -336,6 +345,7 @@ config.module = {
 ```
 
 6. Resolve:
+   These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at Module Resolution for more explanation of how the resolver works.
 
 ```js
 config.resolve = {
@@ -350,7 +360,6 @@ config.resolve = {
 ```js
 if (isProduction) {
   config.output = {
-    // publicPath: path.join(__dirname, 'dist', '/'),
     chunkFilename: "[name].[chunkhash].bundle.js",
     filename: "[name].[chunkhash].bundle.js",
     path: path.join(__dirname, "dist"),
@@ -359,6 +368,9 @@ if (isProduction) {
   config.mode = "production";
 }
 ```
+
+- Here we are reconfiguring the output setup. The name of the chunkfile will now include a hash which help in updating the browser cash. That is, if any chunk is updated with the new code, the file name will contain a different hash which would then be considered as a new file by the browser thereby flushing the previous file and updating it with the new one. For production ready apps this is a must. We can continue without this in development.
+- The bundling mode is set to production which then webpack internally creates a production ready code.
 
 2. Development
 
@@ -379,3 +391,13 @@ if (isDev) {
   };
 }
 ```
+
+- For Development, we are using webpack-dev-server to serves the files locally.
+- When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (a.js, b.js, and c.js) into one bundle (bundle.js) and one of the source files contains an error, the stack trace will point to bundle.js. This isn't always helpful as you probably want to know exactly which source file the error came from.
+- In order to make it easier to track down errors and warnings, JavaScript offers source maps, which map your compiled code back to your original source code. If an error originates from b.js, the source map will tell you exactly that.
+- For this guide, let's use the inline-source-map option, which is good for illustrative purposes.
+- The devServer configurations will configure webpack-dev-server.
+
+## Wrapping up
+
+So that's it! You have set up your React project with webpack successfully! We have covered the basics of webpack, its config, plugins and code-splitting. I have setup a complete React Template with other features such as linting and code formatting. You can checkout the template [here](https://github.com/riteshsp2000/react-boilerplate). Feel free to use and customize it!
